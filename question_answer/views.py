@@ -31,25 +31,23 @@ class QuestionListAPIView(generics.ListAPIView):
 
     queryset = Question.objects.all()
     serializer_class = QuestionSerializer
-    permission_classes = []
 
 
 class QuestionRetrieveAPIView(generics.RetrieveAPIView):
 
     queryset = Question.objects.all()
     serializer_class = RetrieveQuestionSerializer
-    permission_classes = []
 
 
 class QuestionCreateAPIView(generics.CreateAPIView):
 
     queryset = Question.objects.all()
     serializer_class = CreateQuestionSerializer
-    permission_classes = [IsAuthenticated | IsAdminUser]
+    permission_classes = [IsAuthenticated, IsAdminUser]
 
 
 class QuestionDestroyAPIView(generics.DestroyAPIView):
 
     queryset = Question.objects.all()
     serializer_class = QuestionSerializer
-    permission_classes = [IsAuthenticated | IsAdminUser]
+    permission_classes = [IsAuthenticated, IsAdminUser]
