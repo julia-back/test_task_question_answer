@@ -2,6 +2,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 import os
 from datetime import timedelta
+import logging
 
 
 load_dotenv()
@@ -113,3 +114,8 @@ SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=15),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
 }
+
+logger = logging.getLogger()
+console_handler = logging.StreamHandler()
+logger.addHandler(console_handler)
+logger.setLevel(logging.DEBUG)

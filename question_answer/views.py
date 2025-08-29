@@ -3,6 +3,10 @@ from .models import Question, Answer
 from .serializers import QuestionSerializer, CreateQuestionSerializer, RetrieveQuestionSerializer, AnswerSerializer, CreateAnswerSerializer
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from .permissions import IsOwner
+import logging
+
+
+view_logger = logging.getLogger("view")
 
 
 class AnswerRetrieveAPIView(generics.RetrieveAPIView):
@@ -18,6 +22,7 @@ class AnswerCreateAPIView(generics.CreateAPIView):
 
     def perform_create(self, serializer):
         serializer.save(user_id=self.request.user)
+        view_logger.debug(f"Сохранен ответ на вопрос с пользователем {self.request.user.email}")
 
 
 class AnswerDestroyAPIView(generics.DestroyAPIView):
