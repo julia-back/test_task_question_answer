@@ -1,9 +1,12 @@
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+from rest_framework.permissions import AllowAny
 
 
 class CustomTokenObtainPairView(TokenObtainPairView):
-    pass
+
+    permission_classes = [AllowAny]
 
 
 class CustomTokenRefreshView(TokenRefreshView):
-    pass
+
+    permission_classes = [AllowAny]
