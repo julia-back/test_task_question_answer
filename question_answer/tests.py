@@ -11,6 +11,10 @@ class QuestionAPITestCase(APITestCase):
         self.just_user = User.objects.create_user(username="no_staff", email="no@staff.com", password="123", is_staff=False)
         self.user_staff = User.objects.create_user(username="staff", email="staff@staff.com", password="123", is_staff=True)
 
+        self.user_owner = User.objects.create_user(username="no_staff_2", email="no@staff_2.com", password="123",
+                                                   is_staff=False)
+        self.answer = Answer.objects.create(question_id=self.question, user_id=self.user_owner, text="hi")
+
     def test_question_list(self):
         url = reverse("question_answer:question_list")
 
@@ -57,6 +61,11 @@ class QuestionAPITestCase(APITestCase):
         response = self.client.delete(url)
         self.assertEqual(204, response.status_code)
 
+        url_answer_retrieve = reverse("question_answer:answer_retrieve", args=[self.answer.id])
+        response = self.client.get(url_answer_retrieve)
+        self.assertEqual(404, response.status_code)
+        self.assertEqual("No Answer matches the given query.", response.json().get("detail"))
+
 
 class AnswerAPITestCase(APITestCase):
 
@@ -89,6 +98,10 @@ class AnswerAPITestCase(APITestCase):
         self.assertEqual(201, response.status_code)
         self.assertTrue(response.json().get("question_id"))
         self.assertTrue(response.json().get("text"))
+
+        response = self.client.post(url, data={"question_id": (self.question.id + 1), "text": "hi"})
+        self.assertEqual(400, response.status_code)
+        self.assertTrue(response.json().get("question_id")[0].startswith("Invalid pk"))
 
     def test_answer_delete(self):
         url = reverse("question_answer:answer_delete", args=[self.answer.id])
