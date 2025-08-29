@@ -17,14 +17,14 @@ class AnswerCreateAPIView(generics.CreateAPIView):
     serializer_class = CreateAnswerSerializer
 
     def perform_create(self, serializer):
-        serializer.save(user_id=self.request.user.id)
+        serializer.save(user_id=self.request.user)
 
 
 class AnswerDestroyAPIView(generics.DestroyAPIView):
 
     queryset = Answer.objects.all()
     serializer_class = AnswerSerializer
-    permission_classes = [IsAuthenticated | IsOwner]
+    permission_classes = [IsAuthenticated, IsOwner]
 
 
 class QuestionListAPIView(generics.ListAPIView):
