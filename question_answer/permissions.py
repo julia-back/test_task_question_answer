@@ -6,6 +6,7 @@ permission_logger = logging.getLogger("permission")
 
 
 class IsOwner(BasePermission):
+    """Класс разрешения, проверяет, является ли пользователь владельцем по полю user_id."""
 
     def has_object_permission(self, request, view, obj):
         if request.user.id == obj.user_id.id:

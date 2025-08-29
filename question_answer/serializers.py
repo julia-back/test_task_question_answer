@@ -4,6 +4,7 @@ from .models import Answer, Question
 
 
 class AnswerSerializer(serializers.ModelSerializer):
+    """Класс сериализатора ответа."""
 
     class Meta:
         model = Answer
@@ -11,6 +12,7 @@ class AnswerSerializer(serializers.ModelSerializer):
 
 
 class CreateAnswerSerializer(serializers.ModelSerializer):
+    """Класс сериализатора создания ответа."""
 
     class Meta:
         model = Answer
@@ -18,6 +20,7 @@ class CreateAnswerSerializer(serializers.ModelSerializer):
 
 
 class QuestionSerializer(serializers.ModelSerializer):
+    """Класс сериализатора вопроса."""
 
     class Meta:
         model = Question
@@ -25,8 +28,9 @@ class QuestionSerializer(serializers.ModelSerializer):
 
 
 class RetrieveQuestionSerializer(serializers.ModelSerializer):
+    """Класс сериализатора для получения деталей конктерного вопроса."""
 
-    answers = AnswerSerializer(many=True, read_only=True)
+    answer_set = AnswerSerializer(many=True, read_only=True)
 
     class Meta:
         model = Question
@@ -34,6 +38,7 @@ class RetrieveQuestionSerializer(serializers.ModelSerializer):
 
 
 class CreateQuestionSerializer(serializers.ModelSerializer):
+    """Класс сериализатора создания вопроса."""
 
     class Meta:
         model = Question

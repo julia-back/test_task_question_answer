@@ -3,6 +3,7 @@ from django.db import models
 
 
 class User(AbstractUser):
+    """Класс кастомной моделя пользователя."""
 
     email = models.EmailField(unique=True)
 

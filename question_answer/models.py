@@ -4,6 +4,7 @@ from users.models import User
 
 
 class Question(models.Model):
+    """Класс модели вопроса."""
 
     text = models.TextField(max_length=1000)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -13,6 +14,7 @@ class Question(models.Model):
 
 
 class Answer(models.Model):
+    """Класс модели ответоа. Имеет внешние ключи к моделям вопроса и пользователя."""
 
     question_id = models.ForeignKey(Question, on_delete=models.CASCADE)
     user_id = models.ForeignKey(User, on_delete=models.SET(0))

@@ -5,13 +5,18 @@ from users.models import User
 
 
 class TokenAPITestCase(APITestCase):
+    """Класс тестирования получения токенов."""
 
     def setUp(self):
+        """Метод создания предварительных данных для тестов."""
+
         self.test_user = User.objects.create_user(
             username="testuser", email="test@email.com", password="testpsw1234", is_active=True
         )
 
     def test_token_obtain_pair(self):
+        """Метод проверки получения пары токенов."""
+
         # проверяем необходимость юзернейма и пароля для получения токенов
         url = reverse("auth_jwt:token")
         response = self.client.post(url)
@@ -28,6 +33,8 @@ class TokenAPITestCase(APITestCase):
         self.refresh = response.json().get("refresh")
 
     def test_token_refresh(self):
+        """Метод проверки обновления токена."""
+
         # получаем первоначальную пару токенов
         url = reverse("auth_jwt:token")
         response = self.client.post(url, data={"username": self.test_user.username, "password": "testpsw1234"})
