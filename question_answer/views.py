@@ -16,6 +16,9 @@ class AnswerCreateAPIView(generics.CreateAPIView):
     queryset = Answer.objects.all()
     serializer_class = CreateAnswerSerializer
 
+    def perform_create(self, serializer):
+        serializer.save(user_id=self.request.user.id)
+
 
 class AnswerDestroyAPIView(generics.DestroyAPIView):
 
