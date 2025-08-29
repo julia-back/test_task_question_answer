@@ -1,12 +1,15 @@
-from rest_framework.test import APITestCase
 from django.urls import reverse
+from rest_framework.test import APITestCase
+
 from users.models import User
 
 
 class TokenAPITestCase(APITestCase):
 
     def setUp(self):
-        self.test_user = User.objects.create_user(username="testuser", email="test@email.com", password="testpsw1234", is_active=True)
+        self.test_user = User.objects.create_user(
+            username="testuser", email="test@email.com", password="testpsw1234", is_active=True
+        )
 
     def test_token_obtain_pair(self):
         # проверяем необходимость юзернейма и пароля для получения токенов

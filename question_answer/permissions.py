@@ -1,6 +1,6 @@
-from rest_framework.permissions import BasePermission
 import logging
 
+from rest_framework.permissions import BasePermission
 
 permission_logger = logging.getLogger("permission")
 

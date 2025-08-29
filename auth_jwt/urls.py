@@ -1,7 +1,7 @@
 from django.urls import path
-from .apps import AuthJwtConfig
-from . import views
 
+from . import views
+from .apps import AuthJwtConfig
 
 app_name = AuthJwtConfig.name
 

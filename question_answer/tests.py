@@ -1,18 +1,25 @@
-from rest_framework.test import APITestCase
 from django.urls import reverse
-from .models import Question, Answer
+from rest_framework.test import APITestCase
+
 from users.models import User
+
+from .models import Answer, Question
 
 
 class QuestionAPITestCase(APITestCase):
 
     def setUp(self):
         self.question = Question.objects.create(text="Hi!")
-        self.just_user = User.objects.create_user(username="no_staff", email="no@staff.com", password="123", is_staff=False)
-        self.user_staff = User.objects.create_user(username="staff", email="staff@staff.com", password="123", is_staff=True)
+        self.just_user = User.objects.create_user(
+            username="no_staff", email="no@staff.com", password="123", is_staff=False
+        )
+        self.user_staff = User.objects.create_user(
+            username="staff", email="staff@staff.com", password="123", is_staff=True
+        )
 
-        self.user_owner = User.objects.create_user(username="no_staff_2", email="no@staff_2.com", password="123",
-                                                   is_staff=False)
+        self.user_owner = User.objects.create_user(
+            username="no_staff_2", email="no@staff_2.com", password="123", is_staff=False
+        )
         self.answer = Answer.objects.create(question_id=self.question, user_id=self.user_owner, text="hi")
 
     def test_question_list(self):
@@ -70,8 +77,12 @@ class QuestionAPITestCase(APITestCase):
 class AnswerAPITestCase(APITestCase):
 
     def setUp(self):
-        self.user_owner = User.objects.create_user(username="no_staff", email="no@staff.com", password="123", is_staff=False)
-        self.user_other = User.objects.create_user(username="no_staff_2", email="no@staff_2.com", password="123", is_staff=False)
+        self.user_owner = User.objects.create_user(
+            username="no_staff", email="no@staff.com", password="123", is_staff=False
+        )
+        self.user_other = User.objects.create_user(
+            username="no_staff_2", email="no@staff_2.com", password="123", is_staff=False
+        )
         self.question = Question.objects.create(text="Hi!")
         self.answer = Answer.objects.create(question_id=self.question, user_id=self.user_owner, text="hi")
 

@@ -1,9 +1,9 @@
-from pathlib import Path
-from dotenv import load_dotenv
+import logging
 import os
 from datetime import timedelta
-import logging
+from pathlib import Path
 
+from dotenv import load_dotenv
 
 load_dotenv()
 
@@ -24,11 +24,9 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-
     "rest_framework",
     "rest_framework_simplejwt",
     "drf_spectacular",
-
     "question_answer",
     "users",
     "auth_jwt",
@@ -114,8 +112,8 @@ REST_FRAMEWORK = {
 }
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=15),
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=15),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
 }
 
 logger = logging.getLogger()

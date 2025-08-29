@@ -1,10 +1,12 @@
-from rest_framework import generics
-from .models import Question, Answer
-from .serializers import QuestionSerializer, CreateQuestionSerializer, RetrieveQuestionSerializer, AnswerSerializer, CreateAnswerSerializer
-from rest_framework.permissions import IsAuthenticated, IsAdminUser
-from .permissions import IsOwner
 import logging
 
+from rest_framework import generics
+from rest_framework.permissions import IsAdminUser, IsAuthenticated
+
+from .models import Answer, Question
+from .permissions import IsOwner
+from .serializers import (AnswerSerializer, CreateAnswerSerializer, CreateQuestionSerializer, QuestionSerializer,
+                          RetrieveQuestionSerializer)
 
 view_logger = logging.getLogger("view")
 
